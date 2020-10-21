@@ -14,39 +14,21 @@ def main():
   img_input='input.jpg'
   img_output='output.jpg'
 
-    ## Set up the image URL and filename
-  image_url = "http://192.168.0.11:8080/shot.jpg"
-
   cap = cv2.VideoCapture(0) # video capture source camera (Here webcam of laptop) 
-  ret,frame = cap.read() # return a single frame in variable `frame`
-  cv2.imwrite(img_output,frame)   
-  cap.release()
-
   filename =  img_input
 
   # Initialize engine.
   engine = DetectionEngine(model)
   labels = dataset_utils.read_label_file(labels) 
 
+
   while cv2.waitKey(1) & 0xFF != ord('q'):
     # Open the url image, set stream to True, this will return the stream content.
-    r = requests.get(image_url, stream = True)
-
-    # Check if the image was retrieved successfully
-    if r.status_code == 200:
-        # Set decode_content value to True, otherwise the downloaded image file's size will be zero.
-        r.raw.decode_content = True
-        
-        # Open a local file with wb ( write binary ) permission.
-        with open(filename,'wb') as f:
-            shutil.copyfileobj(r.raw, f)
-            
-        print('Image sucessfully Downloaded: ',filename)
-    else:
-        print('Image Couldn\'t be retreived')
-
+  
+    ret,frame = cap.read() # return a single frame in variable `frame`
+    cv2.imwrite(img_input,frame)   
+    
    
-
     # Open image.
     img = Image.open(img_input).convert('RGB')
     #Make the new image half the width and half the height of the original image
@@ -76,22 +58,71 @@ def main():
 
     # Save image with bounding boxes.
     if img_output:
+
+      img = img.resize((round(img.size[0]*3), round(img.size[1]*3)))
       img.save(img_output)
-
       # Reading an image in default mode 
-      image = cv2.imread(img_output) 
       
-      # Window name in which image is displayed 
-      window_name = ''
+      
+      #concatenando imagnes
+      im1 = cv2.imread(img_output) 
+      im2 = cv2.imread('ffffff.png')
+      im3 = cv2.imread('ffffff.png')
+      
+
+      font = cv2.FONT_HERSHEY_SIMPLEX 
+  
+      # org 
+      org = (100, 100) 
+        
+      # fontScale 
+      fontScale = 2
+        
+      # Blue color in BGR 
+      color = (255, 0, 0) 
+        
+      # Line thickness of 2 px 
+      thickness = 2
+        
+      # Using cv2.putText() method 
+      cv2.putText(im2, 'AMBAR', org, font,  
+                        fontScale, color, thickness, cv2.LINE_AA) 
+
+      org = (100, 200) 
+
+         # Using cv2.putText() method 
+      cv2.putText(im2, 'XL', org, font,  
+                        fontScale, color, thickness, cv2.LINE_AA) 
+      org = (100, 100) 
+        
+      cv2.putText(im3, 'VERDE', org, font,  
+                        fontScale, color, thickness, cv2.LINE_AA) 
+      org = (100, 200) 
+
+      cv2.putText(im3, 'S', org, font,  
+                        fontScale, color, thickness, cv2.LINE_AA) 
+                 
+  
+      im_h = cv2.hconcat([im2, im1])
+
+      im_h = cv2.hconcat([im_h, im3])
+      cv2.imwrite(img_output, im_h)
+
+      image = cv2.imread(img_output) 
+
+     
+      cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
+      cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+      cv2.imshow("window",image)
 
       
-      # Using cv2.imshow() method  
-      # Displaying the image  
-      cv2.imshow(window_name, image) 
+
           
       #closing all open windows  
-  cv2.destroyAllWindows()      
+  cv2.destroyAllWindows()   
+  cap.release()   
 
 if __name__ == '__main__':
   main()
+  
 
