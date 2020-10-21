@@ -27,11 +27,6 @@ def main():
   
     ret,frame = cap.read() # return a single frame in variable `frame`
     cv2.imwrite(img_input,frame)   
-    
-    
-    image = Image.open(img_input)
-    new_image = image.resize((960, 720))
-    new_image.save(img_input)
    
     # Open image.
     img = Image.open(img_input).convert('RGB')
@@ -62,7 +57,12 @@ def main():
 
     # Save image with bounding boxes.
     if img_output:
-   
+      img.save(img_output)
+
+      image = Image.open(img_output)
+      new_image = image.resize((960, 720))
+      new_image.save(img_output)
+
       #concatenando imagnes
       im1 = cv2.imread(img_output) 
       im2 = cv2.imread('ffffff.png')
