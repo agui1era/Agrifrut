@@ -15,12 +15,7 @@ def main():
   img_output='output.jpg'
 
     ## Set up the image URL and filename
-  image_url = "http://192.168.0.11:8080/shot.jpg"
-
-  cap = cv2.VideoCapture(0) # video capture source camera (Here webcam of laptop) 
-  ret,frame = cap.read() # return a single frame in variable `frame`
-  cv2.imwrite(img_output,frame)   
-  cap.release()
+  image_url = "http://192.168.0.3:8080/?action=snapshot"
 
   filename =  img_input
 
@@ -29,6 +24,8 @@ def main():
   labels = dataset_utils.read_label_file(labels) 
 
   while cv2.waitKey(1) & 0xFF != ord('q'):
+
+    print('____________________________________')
     # Open the url image, set stream to True, this will return the stream content.
     r = requests.get(image_url, stream = True)
 
@@ -44,7 +41,10 @@ def main():
         print('Image sucessfully Downloaded: ',filename)
     else:
         print('Image Couldn\'t be retreived')
-
+    
+    im = Image.open(filename)
+    im = im.crop((150, 100, 500, 300))
+    im.save(filename)
    
 
     # Open image.
@@ -63,16 +63,21 @@ def main():
 
     # Print and draw detected objects.
     for obj in objs:
-      print('-----------------------------------------')
       if labels:
         print(labels[obj.label_id])
       print('score =', obj.score)
       box = obj.bounding_box.flatten().tolist()
-      print('box =', box)
+      #print('box =', box)
       draw.rectangle(box, outline='yellow')
 
     if not objs:
       print('No objects detected.')
+
+
+
+    #clasificando racimos
+
+
 
     # Save image with bounding boxes.
     if img_output:
