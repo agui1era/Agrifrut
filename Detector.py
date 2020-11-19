@@ -6,6 +6,7 @@ from PIL import Image
 from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
+import json
 
 
 def main():
@@ -181,24 +182,37 @@ def main():
 
     if (CREMA == 0 and AMBAR== 0 and AMBAR_SUAVE == 0):
       print("RACIMO 1 ES ----->    VERDE")
+      OUTPUT1='VERDE'
     if (CREMA >= 1 and AMBAR ==0  and AMBAR_SUAVE == 0):
       print("RACIMO 1 ES ----->    CREMA")
+      OUTPUT1='CREMA'
     if (AMBAR_SUAVE >= 1  and AMBAR == 0):
       print("RACIMO 1 ES ----->    AMBAR_SUAVE")
+      OUTPUT1='AMBAR SUAVE'
     if (AMBAR >= 1):
       print("RACIMO 1 ES ----->    AMBAR")
+      OUTPUT1='AMBAR'
 
     if (CREMA2 == 0 and AMBAR2== 0 and AMBAR_SUAVE2 == 0):
       print("RACIMO 2 ES ----->    VERDE")
+      OUTPUT2='VERDE'
     if (CREMA2 >= 1 and AMBAR2 ==0  and AMBAR_SUAVE2 == 0):
       print("RACIMO 2 ES ----->    CREMA")
+      OUTPUT2='CREMA'
     if (AMBAR_SUAVE2 >= 1  and AMBAR2 == 0):
       print("RACIMO 2 ES ----->    AMBAR_SUAVE")
+      OUTPUT2='AMBAR SUAVE'
     if (AMBAR2 >= 1):
       print("RACIMO 2 ES ----->    AMBAR")
+      OUTPUT2='AMBAR'
    
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
+
+    data = {'CAM1':OUTPUT1,'CAM2':OUTPUT2}
+
+    with open('/var/www/html/color.json', 'w') as outfile:
+        json.dump(data, outfile)
 
 
     # Save image with bounding boxes.
@@ -212,7 +226,7 @@ def main():
 
       # Reading an image in default mode 
       image2 = cv2.imread(img_output2)
-      
+  
 
       final = Image.new("RGB",(1600,800),"black")
       imagen1 = Image.open(img_output)
@@ -228,7 +242,7 @@ def main():
            
       # Using cv2.imshow() method  
       # Displaying the image  
-      cv2.imshow(window_name, image_final) 
+      #cv2.imshow(window_name, image_final) 
           
       #closing all open windows  
   cv2.destroyAllWindows()      
