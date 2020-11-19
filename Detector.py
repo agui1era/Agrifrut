@@ -51,8 +51,11 @@ def main():
     print()
 
     # Open the url image, set stream to True, this will return the stream content.
-    r = requests.get(image_url, stream = True)
-    r2 = requests.get(image_url2, stream = True)
+    try: 
+      r = requests.get(image_url, stream = True)
+      r2 = requests.get(image_url2, stream = True)
+    except:
+      print("Error al descagar imagenes")    
 
     # Check if the image was retrieved successfully
     if (r.status_code == 200) and (r2.status_code == 200) :
