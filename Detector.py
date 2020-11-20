@@ -21,8 +21,8 @@ def main():
   img_output2='output2.jpg'
 
   # Set up the image URL and filename
-  image_url = "http://192.168.0.6:8080/?action=snapshot"
-  image_url2 = "http://192.168.0.3:8080/?action=snapshot"
+  image_url = "http://192.168.1.10:8080/?action=snapshot"
+  image_url2 = "http://192.168.1.20:8080/?action=snapshot"
 
   filename =  img_input
   filename2 =  img_input2
@@ -214,7 +214,7 @@ def main():
 
     data = {'CAM1':OUTPUT1,'CAM2':OUTPUT2}
 
-    with open('/var/www/html/color.json', 'w') as outfile:
+    with open('/var/www/html/data.json', 'w') as outfile:
         json.dump(data, outfile)
 
 
