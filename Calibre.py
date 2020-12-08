@@ -37,6 +37,8 @@ import platform
 import requests # to get image from the web
 import shutil # to save it locally
 import json
+import matplotlib.pyplot as plt 
+from PIL import Image, ImageFilter 
 
 img_input='input.jpg'
 modelo_calibre="model_calibre.tflite"
@@ -135,26 +137,55 @@ def main():
         print('Images Couldn\'t be retreived')
     
     im = Image.open(filename)
-    im = im.crop((50, 100, 500, 300))
+    im = im.crop((50, 100, 500, 300))  
     im.save(filename)
 
+
     im2 = Image.open(filename2)
-    im2 = im2.crop((150, 100, 500, 300))  
+    im2 = im2.crop((150, 100, 500, 300))
     im2.save(filename2)
- 
-
-
-
-
    
+     
+
+    # Opening the image (R prefixed to string 
+    # in order to deal with '\' in paths) 
+    image = Image.open(filename) 
+      
+    # Converting the image to greyscale, as edge detection  
+    # requires input image to be of mode = Greyscale (L) 
+    image = image.convert("L") 
+      
+    # Detecting Edges on the Image using the argument ImageFilter.FIND_EDGES 
+    image = image.filter(ImageFilter.FIND_EDGES) 
+      
+    # Saving the Image Under the name Edge_Sample.png 
+    image.save(filename)
+
+
+
+    # Opening the image (R prefixed to string 
+    # in order to deal with '\' in paths) 
+    image2 = Image.open(filename2) 
+      
+    # Converting the image to greyscale, as edge detection  
+    # requires input image to be of mode = Greyscale (L) 
+    image2 = image2.convert("L") 
+      
+    # Detecting Edges on the Image using the argument ImageFilter.FIND_EDGES 
+    image2 = image2.filter(ImageFilter.FIND_EDGES) 
+      
+    # Saving the Image Under the name Edge_Sample.png 
+    image2.save(filename2)
 
 
     #motor de clasificación
     #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
     size = classify.input_size(interpreter)
     image = Image.open(img_input).convert('RGB').resize(size, Image.ANTIALIAS)
     classify.set_input(interpreter, image)
-
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print("")
     print('----INFERENCE TIME----')
     print('Note: The first inference on Edge TPU is slow because it includes',
           'loading the model into Edge TPU memory.')
@@ -168,10 +199,35 @@ def main():
     print('-------RESULTS--------')
     for klass in classes:
       print('%s: %.5f' % (labels.get(klass.id, klass.id), klass.score))
+
+    #segunda imagen
+    
+    size = classify.input_size(interpreter)
+    image2 = Image.open(img_input2).convert('RGB').resize(size, Image.ANTIALIAS)
+    classify.set_input(interpreter, image2)
+    print("")
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print("")
+    print('----INFERENCE TIME 2----')
+    print('Note: The first inference on Edge TPU is slow because it includes',
+          'loading the model into Edge TPU memory.')
+    for _ in range(5):
+      start = time.perf_counter()
+      interpreter.invoke()
+      inference_time = time.perf_counter() - start
+      classes = classify.get_output(interpreter, 1, 0)
+      print('%.1fms' % (inference_time * 1000))
+
+    print('-------RESULTS2--------')
+    for klass in classes:
+      print('%s: %.5f' % (labels.get(klass.id, klass.id), klass.score))
+
+
+
     #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     # Window name in which image is displayed 
-    image_final = cv2.imread(img_input) 
+    image_final = cv2.imread(img_input2) 
     window_name = ''
    
     # Using cv2.imshow() method  
