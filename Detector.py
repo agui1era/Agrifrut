@@ -1,4 +1,3 @@
-
 import cv2  
 from edgetpu.detection.engine import DetectionEngine
 from edgetpu.utils import dataset_utils
@@ -245,7 +244,7 @@ def main():
            
       # Using cv2.imshow() method  
       # Displaying the image  
-      #cv2.imshow(window_name, image_final) 
+      cv2.imshow(window_name, image_final) 
           
       #closing all open windows  
   cv2.destroyAllWindows()      
