@@ -1,33 +1,4 @@
-# Lint as: python3
-# Copyright 2019 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-r"""Example using TF Lite to classify a given image using an Edge TPU.
 
-   To run this code, you must attach an Edge TPU attached to the host and
-   install the Edge TPU runtime (`libedgetpu.so`) and `tflite_runtime`. For
-   device setup instructions, see g.co/coral/setup.
-
-   Example usage (use `install_requirements.sh` to get these files):
-   ```
-   python3 classify_image.py \
-     --model models/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite  \
-     --labels models/inat_bird_labels.txt \
-     --input images/parrot.jpg
-   ```
-"""
-
-import argparse
 import time
 import cv2  
 from PIL import Image
@@ -132,7 +103,6 @@ def main():
         print('Image sucessfully Downloaded2 : ',filename2)
         print()
 
-
     else:
         print('Images Couldn\'t be retreived')
     
@@ -140,13 +110,11 @@ def main():
     im = im.crop((50, 100, 500, 300))  
     im.save(filename)
 
-
     im2 = Image.open(filename2)
     im2 = im2.crop((150, 100, 500, 300))
     im2.save(filename2)
    
-     
-
+    
     # Opening the image (R prefixed to string 
     # in order to deal with '\' in paths) 
     image = Image.open(filename) 
@@ -160,8 +128,6 @@ def main():
       
     # Saving the Image Under the name Edge_Sample.png 
     image.save(filename)
-
-
 
     # Opening the image (R prefixed to string 
     # in order to deal with '\' in paths) 
@@ -221,8 +187,6 @@ def main():
     print('-------RESULTS2--------')
     for klass in classes:
       print('%s: %.5f' % (labels.get(klass.id, klass.id), klass.score))
-
-
 
     #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 

@@ -210,8 +210,10 @@ def main():
    
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
-
-    data = {'CAM1':OUTPUT1,'CAM2':OUTPUT2}
+    OUTPUT1_calibre='ML'
+    OUTPUT2_calibre='ML'
+    
+    data = {'color':{'CAM1':OUTPUT1,'CAM2':OUTPUT2}, 'calibre':{'CAM1':OUTPUT1_calibre,'CAM2':OUTPUT2_calibre}}
 
     with open('/var/www/html/data.json', 'w') as outfile:
         json.dump(data, outfile)
