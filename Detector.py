@@ -7,11 +7,8 @@ import requests # to get image from the web
 import shutil # to save it locally
 import json
 
-
-
 def main():
 
-  
   objetos=20
   limite=0.4
   model='model.tflite'
@@ -33,10 +30,7 @@ def main():
   engine = DetectionEngine(model)
   labels = dataset_utils.read_label_file(labels)
 
-
-
   while cv2.waitKey(1) & 0xFF != ord('q'):
-
 
     AMBAR=0
     AMBAR_SUAVE=0
@@ -57,7 +51,8 @@ def main():
       r = requests.get(image_url, stream = True)
       r2 = requests.get(image_url2, stream = True)
     except:
-      print("Error al descagar imagenes")    
+      print("Error al descagar imagenes")
+      break   
 
     # Check if the image was retrieved successfully
     if (r.status_code == 200) and (r2.status_code == 200) :
@@ -136,8 +131,6 @@ def main():
     if not objs:
       print('No objects detected.')
 
-
-   
     # Open image.
     img2 = Image.open(img_input2).convert('RGB')
     #Make the new image half the width and half the height of the original image
