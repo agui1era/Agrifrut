@@ -8,9 +8,12 @@ import shutil # to save it locally
 import json
 
 
+
 def main():
 
-
+  
+  objetos=20
+  limite=0.4
   model='model.tflite'
   labels='labels.txt'
   img_input='input.jpg'
@@ -98,10 +101,10 @@ def main():
    
     # Run inference.
     objs = engine.detect_with_image(img,
-                                    threshold=0.5,
+                                    threshold=limite,
                                     keep_aspect_ratio='store_true',
                                     relative_coord=False,
-                                    top_k=10)
+                                    top_k=objetos)
 
     # Print and draw detected objects.
     print('---------------- OBJETO 1 ----------------')
@@ -144,10 +147,10 @@ def main():
    
     # Run inference.
     objs2 = engine.detect_with_image(img2,
-                                    threshold=0.5,
+                                    threshold=limite,
                                     keep_aspect_ratio='store_true',
                                     relative_coord=False,
-                                    top_k=10)
+                                    top_k=objetos)
 
     # Print and draw detected objects.
     print('---------------- OBJETO 2 ----------------')
@@ -232,14 +235,14 @@ def main():
       image2 = cv2.imread(img_output2)
   
 
-      final = Image.new("RGB",(1600,800),"black")
+      final = Image.new("RGB",(1000,250),"black")
       imagen1 = Image.open(img_output)
       imagen2 = Image.open(img_output2)
       final.paste(imagen1, (0,0))
-      final.paste(imagen2, (599,0))
+      final.paste(imagen2, (500,0))
       final.save("final.jpg")
 
-      image_final = cv2.imread(img_output) 
+      image_final = cv2.imread("final.jpg") 
 
       # Window name in which image is displayed 
       window_name = ''
