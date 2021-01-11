@@ -9,6 +9,7 @@ import json
 
 def main():
 
+  #configuraciones
   objetos=20
   limite=0.4
   model='model.tflite'
@@ -22,6 +23,8 @@ def main():
   # Set up the image URL and filename
   image_url = "http://192.168.1.10:8080/?action=snapshot"
   image_url2 = "http://192.168.1.20:8080/?action=snapshot"
+
+  #final configuraciones
 
   filename =  img_input
   filename2 =  img_input2
@@ -82,6 +85,8 @@ def main():
     else:
         print('Images Couldn\'t be retreived')
     
+    #recortes de imagenes segun camara
+
     im = Image.open(filename)
     im = im.crop((50, 100, 500, 300))
     im.save(filename)
@@ -125,6 +130,7 @@ def main():
       #print('box =', box)
       draw.rectangle(box, outline='yellow')
     TOTAL1=AMBAR+AMBAR_SUAVE+VERDE+CREMA
+
     print('AMBAR: '+str(AMBAR))
     print('AMBAR_SUAVE: '+str(AMBAR_SUAVE))
     print('VERDE: '+str(VERDE))
@@ -165,6 +171,7 @@ def main():
       box2 = obj2.bounding_box.flatten().tolist()
       #print('box =', box)
       draw2.rectangle(box2, outline='yellow')
+
     TOTAL2=AMBAR2+AMBAR_SUAVE2+VERDE2+CREMA2
     print('AMBAR: '+str(AMBAR2))
     print('AMBAR_SUAVE: '+str(AMBAR_SUAVE2))
@@ -210,6 +217,7 @@ def main():
    
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
+    #generando archivo de salida
     OUTPUT1_calibre='ML'
     OUTPUT2_calibre='ML'
     
@@ -231,7 +239,7 @@ def main():
       # Reading an image in default mode 
       image2 = cv2.imread(img_output2)
   
-
+      #mostrar imagenes en una ventana!
       final = Image.new("RGB",(1000,250),"black")
       imagen1 = Image.open(img_output)
       imagen2 = Image.open(img_output2)
