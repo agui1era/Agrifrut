@@ -45,14 +45,18 @@ def main():
     print()
     print('____________________________________')
     print()
-
+    
+    reintento=1
     # Open the url image, set stream to True, this will return the stream content.
-    try: 
-      r = requests.get(image_url, stream = True)
-      r2 = requests.get(image_url2, stream = True)
-    except:
-      print("Error al descagar imagenes")
-      break   
+    while reintento:
+      try: 
+        r = requests.get(image_url, stream = True)
+        r2 = requests.get(image_url2, stream = True)
+        reintento=0
+      except:
+        print("Error al descagar imagenes.. reintento "+str(reintento))
+        reintento=reintento+1
+         
 
     # Check if the image was retrieved successfully
     if (r.status_code == 200) and (r2.status_code == 200) :
@@ -242,7 +246,7 @@ def main():
            
       # Using cv2.imshow() method  
       # Displaying the image  
-      cv2.imshow(window_name, image_final) 
+      #cv2.imshow(window_name, image_final) 
           
       #closing all open windows  
   cv2.destroyAllWindows()      
