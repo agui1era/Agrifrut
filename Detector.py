@@ -217,9 +217,9 @@ def main():
    
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
-    if TOTAL1 < 5
+    if TOTAL1 < 5:
         OUTPUT1='Detectando..'
-    if TOTAL2 < 5
+    if TOTAL2 < 5:
         OUTPUT2='Detectando..
 
     #generando archivo de salida
