@@ -12,7 +12,7 @@ def main():
   #configuraciones
   objetos=20
   limite=0.4
-  limite_racimo=2
+  limite_racimo=5
   model='model.tflite'
   labels='labels.txt'
   img_input='input.jpg'
