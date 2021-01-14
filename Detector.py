@@ -12,6 +12,7 @@ def main():
   #configuraciones
   objetos=20
   limite=0.4
+  limite_racimo=2
   model='model.tflite'
   labels='labels.txt'
   img_input='input.jpg'
@@ -217,9 +218,9 @@ def main():
    
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
-    if TOTAL1 < 5:
+    if TOTAL1 < limite_racimo:
         OUTPUT1='Detectando..'
-    if TOTAL2 < 5:
+    if TOTAL2 < limite_racimo:
         OUTPUT2='Detectando..'
 
     #generando archivo de salida
