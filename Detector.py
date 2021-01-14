@@ -220,12 +220,12 @@ def main():
     if TOTAL1 < 5:
         OUTPUT1='Detectando..'
     if TOTAL2 < 5:
-        OUTPUT2='Detectando..
+        OUTPUT2='Detectando..'
 
     #generando archivo de salida
     OUTPUT1_calibre='Detectando..'
     OUTPUT2_calibre='Detectando..'
-    
+
     data = {'color':{'CAM1':OUTPUT1,'CAM2':OUTPUT2}, 'calibre':{'CAM1':OUTPUT1_calibre,'CAM2':OUTPUT2_calibre}}
 
     with open('/var/www/html/data.json', 'w') as outfile:
