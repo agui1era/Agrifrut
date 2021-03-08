@@ -6,6 +6,8 @@ from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
 
+NEGRA=0
+ROSADA=0
 
 def main():
   model='model.tflite'
@@ -22,6 +24,9 @@ def main():
 
 
   while cv2.waitKey(1) & 0xFF != ord('q'):
+
+    rosada=0
+    negra=0
     # Open the url image, set stream to True, this will return the stream content.
   
     ret,frame = cap.read() # return a single frame in variable `frame`
@@ -43,16 +48,24 @@ def main():
 
     # Print and draw detected objects.
     for obj in objs:
-      print('-----------------------------------------')
       if labels:
         print(labels[obj.label_id])
-      print('score =', obj.score)
+        if(labels[obj.label_id] == "negra"):
+            negra=negra+1
+        if(labels[obj.label_id] == "rosada"):
+            rosada=rosada+1
+        
       box = obj.bounding_box.flatten().tolist()
-      print('box =', box)
       draw.rectangle(box, outline='yellow')
 
     if not objs:
       print('No objects detected.')
+    print('__________________________________')
+    print('')
+    print('TOTAL negra: '+str(negra))
+    print('TOTAL rosada:'+str(rosada))
+    print('__________________________________')
+    print('')
 
     # Save image with bounding boxes.
     if img_output:
@@ -62,7 +75,7 @@ def main():
       image = cv2.imread(img_output) 
       cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
       #cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
-      cv2.imshow("window",image)
+      #cv2.imshow("window",image)
 
       #closing all open windows  
   cv2.destroyAllWindows()   
