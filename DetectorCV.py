@@ -8,6 +8,8 @@ import shutil # to save it locally
 
 NEGRA=0
 ROSADA=0
+limite=0.3
+cant_objetos=20
 
 def main():
   model='model.tflite'
@@ -35,21 +37,20 @@ def main():
     # Open image.
     img = Image.open(img_input).convert('RGB')
     #Make the new image half the width and half the height of the original image
-    img = img.resize((round(img.size[0]*0.5), round(img.size[1])))
+    img = img.resize((round(img.size[0]), round(img.size[1])))
  
     draw = ImageDraw.Draw(img)
    
     # Run inference.
     objs = engine.detect_with_image(img,
-                                    threshold=0.5,
+                                    threshold=limite,
                                     keep_aspect_ratio='store_true',
                                     relative_coord=False,
-                                    top_k=10)
+                                    top_k=cant_objetos)
 
     # Print and draw detected objects.
     for obj in objs:
       if labels:
-        print(labels[obj.label_id])
         if(labels[obj.label_id] == "negra"):
             negra=negra+1
         if(labels[obj.label_id] == "rosada"):
