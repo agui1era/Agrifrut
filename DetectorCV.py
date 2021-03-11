@@ -5,6 +5,7 @@ from PIL import Image
 from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
+import json
 
 NEGRA=0
 ROSADA=0
@@ -67,12 +68,16 @@ def main():
     print('TOTAL rosada:'+str(rosada))
     print('__________________________________')
     print('')
+    
+   
+    data = {'CAM1':{'negra':str(negra),'rosada':str(rosada)}}
+    
+    with open('/var/www/html/data.json', 'w') as outfile:
+        json.dump(data, outfile)
 
     # Save image with bounding boxes.
     if img_output:
       img.save(img_output)
-
-
       image = cv2.imread(img_output) 
       cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
       #cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
