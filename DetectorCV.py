@@ -7,8 +7,8 @@ from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
 
-
-
+rosada=0
+negra=0
 
 def main():
   model='model.tflite'
