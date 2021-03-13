@@ -50,13 +50,13 @@ def main():
 
     # Print and draw detected objects.
     for obj in objs:
-      print('-----------------------------------------')
+      #print('-----------------------------------------')
       if labels:
         if(labels[obj.label_id] == "negra"):
             negra=negra+1
         if(labels[obj.label_id] == "rosada"):
             rosada=rosada+1
-      print('score =', obj.score)
+      #print('score =', obj.score)
       box = obj.bounding_box.flatten().tolist()
       #print('box =', box)
       draw.rectangle(box, outline='yellow')
@@ -110,7 +110,7 @@ def main():
       org = (100, 200) 
 
          # Using cv2.putText() method 
-      cv2.putText(im2, str(final_negra), org, font,  
+      cv2.putText(im2, str(final_negra)+"%", org, font,  
                         fontScale, color, thickness, cv2.LINE_AA) 
       org = (100, 100) 
         
@@ -118,7 +118,7 @@ def main():
                         fontScale, color2, thickness, cv2.LINE_AA) 
       org = (100, 200) 
 
-      cv2.putText(im3, str(final_rosada), org, font,  
+      cv2.putText(im3, str(final_rosada)+"%", org, font,  
                         fontScale, color2, thickness, cv2.LINE_AA) 
                  
   
