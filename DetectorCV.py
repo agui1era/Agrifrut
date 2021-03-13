@@ -15,8 +15,6 @@ def main():
   labels='labels.txt'
   img_input='input.jpg'
   img_output='output.jpg'
-  rosada=0
-  negra=0
   limite=0.2
   cantidad=20
 
@@ -30,6 +28,8 @@ def main():
 
   while cv2.waitKey(1) & 0xFF != ord('q'):
     # Open the url image, set stream to True, this will return the stream content.
+    rosada=0
+    negra=0
   
     ret,frame = cap.read() # return a single frame in variable `frame`
     cv2.imwrite(img_input,frame)   
