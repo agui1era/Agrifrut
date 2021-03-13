@@ -7,8 +7,7 @@ from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
 
-rosada=0
-negra=0
+
 
 def main():
   model='model.tflite'
@@ -17,6 +16,8 @@ def main():
   img_output='output.jpg'
   limite=0.2
   cantidad=20
+  rosada=0
+  negra=0
 
   cap = cv2.VideoCapture(0) # video capture source camera (Here webcam of laptop) 
   filename =  img_input
