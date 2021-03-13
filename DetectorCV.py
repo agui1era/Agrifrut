@@ -69,9 +69,14 @@ def main():
     print('TOTAL rosada:'+str(rosada))
     print('__________________________________')
     print('')
-  
-    final_negra=round(negra/(negra+rosada)*100)
-    final_rosada=round(rosada/(negra+rosada)*100)
+    if ((negra+rosada)!=0):
+      final_negra=round(negra/(negra+rosada)*100)
+    else:
+      final_negra=0
+    if ((negra+rosada)!=0):
+      final_rosada=round(rosada/(negra+rosada)*100)
+    else:
+      final_rosada=0
 
 
     # Save image with bounding boxes.
