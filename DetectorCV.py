@@ -28,8 +28,8 @@ def main():
 
   while cv2.waitKey(1) & 0xFF != ord('q'):
     # Open the url image, set stream to True, this will return the stream content.
-    rosada=0
-    negra=0
+    final_rosada=0
+    final_negra=0
   
     ret,frame = cap.read() # return a single frame in variable `frame`
     cv2.imwrite(img_input,frame)   
@@ -59,7 +59,7 @@ def main():
       #print('score =', obj.score)
       box = obj.bounding_box.flatten().tolist()
       #print('box =', box)
-      draw.rectangle(box, outline='yellow')
+      draw.rectangle(box, outline='red')
 
     if not objs:
       print('No objects detected.')
