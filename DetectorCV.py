@@ -69,11 +69,11 @@ def main():
     print('TOTAL rosada:'+str(rosada))
     print('__________________________________')
     print('')
-    if ((negra+rosada)==0):
+    if ((negra+rosada)!=0):
       final_negra=round(negra/(negra+rosada)*100)
     else:
       final_negra=0
-    if ((negra+rosada)==0):
+    if ((negra+rosada)!=0):
       final_rosada=round(rosada/(negra+rosada)*100)
     else:
       final_rosada=0
