@@ -70,15 +70,11 @@ def main():
     print('TOTAL rosada:'+str(rosada))
     print('__________________________________')
     print('')
-    if ((negra+rosada)!=0):
-      final_negra=round(negra/(negra+rosada)*100)
-    else:
-      final_negra=0
-    if ((negra+rosada)!=0):
-      final_rosada=round(rosada/(negra+rosada)*100)
-    else:
-      final_rosada=0
 
+    data = {'CAM1':{'negra':str(negra),'rosada':str(rosada)}}
+
+    with open('/var/www/html/data.json', 'w') as outfile:
+        json.dump(data, outfile)
 
     # Save image with bounding boxes.
     if img_output:
@@ -137,8 +133,8 @@ def main():
 
      
       cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
-      cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
-      cv2.imshow("window",image)
+      #cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+      #cv2.imshow("window",image)
 
       
 
