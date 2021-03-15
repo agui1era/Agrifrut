@@ -6,6 +6,7 @@ from PIL import Image
 from PIL import ImageDraw
 import requests # to get image from the web
 import shutil # to save it locally
+import json
 
 
 
