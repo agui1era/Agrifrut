@@ -15,7 +15,7 @@ def main():
   labels='labels.txt'
   img_input='input.jpg'
   img_output='output.jpg'
-  limite=0.3
+  limite=0.1
   cantidad=20
   rosada=0
   negra=0
